@@ -30,12 +30,13 @@
 
     <TextView
         android:id="@+id/txt_round_1"
+        style="@style/FilledPin"
+        android:layout_marginStart="48dp"
         android:layout_marginTop="16dp"
         app:layout_constraintEnd_toStartOf="@+id/txt_round_2"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        style="@style/FilledPin" />
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <TextView
         android:id="@+id/txt_round_2"
@@ -55,36 +56,37 @@
 
     <TextView
         android:id="@+id/txt_round_4"
+        style="@style/EmptyPin"
+        android:layout_marginEnd="48dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/txt_round_3"
-        app:layout_constraintTop_toTopOf="@+id/txt_round_3"
-        style="@style/EmptyPin" />
+        app:layout_constraintTop_toTopOf="@+id/txt_round_3" />
 
     <Button
         android:id="@+id/button2"
-        android:layout_marginStart="@dimen/pin_button_space"
-        android:layout_marginTop="56dp"
+        style="@style/PinButton"
+        android:layout_marginEnd="@dimen/pin_button_space"
         android:text="@string/letter_1"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_round_1"
-        style="@style/PinButton"/>
+        app:layout_constraintEnd_toStartOf="@+id/button3"
+        app:layout_constraintTop_toTopOf="@+id/button3" />
 
     <Button
         android:id="@+id/button3"
+        style="@style/PinButton"
+        android:layout_marginTop="60dp"
         android:text="@string/letter_2"
-        app:layout_constraintEnd_toStartOf="@+id/button4"
-        app:layout_constraintStart_toEndOf="@+id/button2"
-        app:layout_constraintTop_toTopOf="@+id/button2"
-        style="@style/PinButton" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txt_round_1" />
 
     <Button
         android:id="@+id/button4"
-        android:layout_marginEnd="@dimen/pin_button_space"
+        style="@style/PinButton"
+        android:layout_marginStart="@dimen/pin_button_space"
         android:text="@string/letter_3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/button3"
-        style="@style/PinButton" />
+        app:layout_constraintStart_toEndOf="@+id/button3"
+        app:layout_constraintTop_toTopOf="@+id/button3" />
 
     <Button
         android:id="@+id/button5"
