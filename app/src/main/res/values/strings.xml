@@ -15,4 +15,5 @@
     <string name="letter_9">9</string>
     <string name="letter_0">0</string>
     <string name="delete">⌫</string>
+    <string name="enter_pin">Enter pin:</string>
 </resources>
