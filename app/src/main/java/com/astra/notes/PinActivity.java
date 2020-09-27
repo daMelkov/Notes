@@ -3,6 +3,7 @@ package com.astra.notes;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,6 +12,12 @@ import java.util.Stack;
 
 public class PinActivity extends AppCompatActivity {
     private static final int PINS_COUNT = 4;
+    private static final int[] PINS_MARKERS = new int[] {
+            R.id.txt_round_1,
+            R.id.txt_round_2,
+            R.id.txt_round_3,
+            R.id.txt_round_4
+    };
 
     private Stack<Integer> PINS = new Stack<>();
     private int currentPin = 0;
@@ -77,8 +84,9 @@ public class PinActivity extends AppCompatActivity {
             }
 
             PINS.add(number);
-            currentPin++;
+            firePoint(currentPin);
 
+            currentPin++;
             if(currentPin == PINS_COUNT) {
                 setPin(PINS);
             }
@@ -95,8 +103,14 @@ public class PinActivity extends AppCompatActivity {
 
             PINS.pop();
             currentPin--;
+            firePoint(currentPin);
         }
     };
+
+    private void firePoint(int currentPin) {
+        TextView view = (TextView) findViewById(PINS_MARKERS[currentPin]);
+        view.setTextAppearance(PinActivity.this, R.style.FilledPin);
+    }
 
     private void setPin(Stack<Integer> pins) {
         Integer[] numbers = new Integer[PINS_COUNT];
@@ -108,5 +122,6 @@ public class PinActivity extends AppCompatActivity {
         }
 
         Integer code = Integer.parseInt(builder.toString());
+        finish();
     }
 }
