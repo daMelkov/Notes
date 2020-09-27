@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp">
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/button_cancel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/cancel"
@@ -18,14 +17,14 @@
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="56dp"
+        android:layout_marginTop="40dp"
         android:gravity="center"
         android:textSize="40sp"
         android:textStyle="bold"
         android:text="@string/enter_pin"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button"
+        app:layout_constraintTop_toBottomOf="@+id/button_cancel"
          />
 
     <TextView
@@ -64,15 +63,15 @@
         app:layout_constraintTop_toTopOf="@+id/txt_round_3" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/button_one"
         style="@style/PinButton"
         android:layout_marginEnd="@dimen/pin_button_space"
         android:text="@string/letter_1"
-        app:layout_constraintEnd_toStartOf="@+id/button3"
-        app:layout_constraintTop_toTopOf="@+id/button3" />
+        app:layout_constraintEnd_toStartOf="@+id/button_two"
+        app:layout_constraintTop_toTopOf="@+id/button_two" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/button_two"
         style="@style/PinButton"
         android:layout_marginTop="60dp"
         android:text="@string/letter_2"
@@ -81,73 +80,73 @@
         app:layout_constraintTop_toBottomOf="@+id/txt_round_1" />
 
     <Button
-        android:id="@+id/button4"
+        android:id="@+id/button_three"
         style="@style/PinButton"
         android:layout_marginStart="@dimen/pin_button_space"
         android:text="@string/letter_3"
-        app:layout_constraintStart_toEndOf="@+id/button3"
-        app:layout_constraintTop_toTopOf="@+id/button3" />
+        app:layout_constraintStart_toEndOf="@+id/button_two"
+        app:layout_constraintTop_toTopOf="@+id/button_two" />
 
     <Button
-        android:id="@+id/button5"
+        android:id="@+id/button_four"
         android:layout_marginTop="@dimen/pin_button_space"
         android:text="@string/letter_4"
-        app:layout_constraintStart_toStartOf="@+id/button2"
-        app:layout_constraintTop_toBottomOf="@+id/button2"
+        app:layout_constraintStart_toStartOf="@+id/button_one"
+        app:layout_constraintTop_toBottomOf="@+id/button_one"
         style="@style/PinButton" />
 
     <Button
-        android:id="@+id/button6"
+        android:id="@+id/button_five"
         android:text="@string/letter_5"
-        app:layout_constraintEnd_toStartOf="@+id/button7"
-        app:layout_constraintStart_toEndOf="@+id/button5"
-        app:layout_constraintTop_toTopOf="@+id/button5"
+        app:layout_constraintEnd_toStartOf="@+id/button_six"
+        app:layout_constraintStart_toEndOf="@+id/button_four"
+        app:layout_constraintTop_toTopOf="@+id/button_four"
         style="@style/PinButton" />
 
     <Button
-        android:id="@+id/button7"
+        android:id="@+id/button_six"
         android:text="@string/letter_6"
-        app:layout_constraintEnd_toEndOf="@+id/button4"
-        app:layout_constraintTop_toTopOf="@+id/button6"
+        app:layout_constraintEnd_toEndOf="@+id/button_three"
+        app:layout_constraintTop_toTopOf="@+id/button_five"
         style="@style/PinButton" />
 
     <Button
-        android:id="@+id/button8"
+        android:id="@+id/button_seven"
         android:layout_marginTop="@dimen/pin_button_space"
         android:text="@string/letter_7"
-        app:layout_constraintStart_toStartOf="@+id/button5"
-        app:layout_constraintTop_toBottomOf="@+id/button5"
+        app:layout_constraintStart_toStartOf="@+id/button_four"
+        app:layout_constraintTop_toBottomOf="@+id/button_four"
         style="@style/PinButton" />
 
     <Button
-        android:id="@+id/button9"
+        android:id="@+id/button_eight"
         android:text="@string/letter_8"
-        app:layout_constraintEnd_toStartOf="@+id/button10"
-        app:layout_constraintStart_toEndOf="@+id/button8"
-        app:layout_constraintTop_toTopOf="@+id/button8"
+        app:layout_constraintEnd_toStartOf="@+id/button_nine"
+        app:layout_constraintStart_toEndOf="@+id/button_seven"
+        app:layout_constraintTop_toTopOf="@+id/button_seven"
         style="@style/PinButton" />
 
     <Button
-        android:id="@+id/button10"
+        android:id="@+id/button_nine"
         android:text="@string/letter_9"
-        app:layout_constraintEnd_toEndOf="@+id/button7"
-        app:layout_constraintTop_toTopOf="@+id/button9"
+        app:layout_constraintEnd_toEndOf="@+id/button_six"
+        app:layout_constraintTop_toTopOf="@+id/button_eight"
         style="@style/PinButton" />
 
     <Button
-        android:id="@+id/button11"
+        android:id="@+id/button_zero"
         android:layout_marginTop="@dimen/pin_button_space"
         android:text="@string/letter_0"
-        app:layout_constraintEnd_toEndOf="@+id/button9"
-        app:layout_constraintStart_toStartOf="@+id/button9"
-        app:layout_constraintTop_toBottomOf="@+id/button9"
+        app:layout_constraintEnd_toEndOf="@+id/button_eight"
+        app:layout_constraintStart_toStartOf="@+id/button_eight"
+        app:layout_constraintTop_toBottomOf="@+id/button_eight"
         style="@style/PinButton" />
 
     <Button
-        android:id="@+id/button12"
+        android:id="@+id/button_delete"
         android:text="@string/delete"
-        app:layout_constraintEnd_toEndOf="@+id/button10"
-        app:layout_constraintTop_toTopOf="@+id/button11"
+        app:layout_constraintEnd_toEndOf="@+id/button_nine"
+        app:layout_constraintTop_toTopOf="@+id/button_zero"
         style="@style/PinButton" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
