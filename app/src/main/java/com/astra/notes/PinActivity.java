@@ -11,8 +11,8 @@ import java.util.Stack;
 
 public class PinActivity extends AppCompatActivity {
     private static final int PINS_COUNT = 4;
-    private static Stack<Integer> PINS = new Stack<>();
 
+    private Stack<Integer> PINS = new Stack<>();
     private int currentPin = 0;
 
     @Override
@@ -78,6 +78,10 @@ public class PinActivity extends AppCompatActivity {
 
             PINS.add(number);
             currentPin++;
+
+            if(currentPin == PINS_COUNT) {
+                setPin(PINS);
+            }
         }
     };
 
@@ -93,4 +97,16 @@ public class PinActivity extends AppCompatActivity {
             currentPin--;
         }
     };
+
+    private void setPin(Stack<Integer> pins) {
+        Integer[] numbers = new Integer[PINS_COUNT];
+        pins.toArray(numbers);
+
+        StringBuilder builder = new StringBuilder();
+        for(Integer number : numbers) {
+            builder.append(number);
+        }
+
+        Integer code = Integer.parseInt(builder.toString());
+    }
 }
