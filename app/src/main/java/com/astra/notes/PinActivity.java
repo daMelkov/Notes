@@ -83,33 +83,47 @@ public class PinActivity extends AppCompatActivity {
                 return;
             }
 
+            view.setEnabled(false);
+
             PINS.add(number);
-            firePoint(currentPin);
+            lightPinOn(currentPin);
 
             currentPin++;
             if(currentPin == PINS_COUNT) {
                 setPin(PINS);
             }
+
+            view.setEnabled(true);
         }
     };
 
     /* delete */
     View.OnClickListener onDelete = new View.OnClickListener() {
         @Override
-        public void onClick(View v) {
+        public void onClick(View view) {
             if(currentPin == 0) {
                 return;
             }
 
+            view.setEnabled(false);
+
             PINS.pop();
+
             currentPin--;
-            firePoint(currentPin);
+            lightPinOff(currentPin);
+
+            view.setEnabled(true);
         }
     };
 
-    private void firePoint(int currentPin) {
+    private void lightPinOn(int currentPin) {
         TextView view = (TextView) findViewById(PINS_MARKERS[currentPin]);
         view.setBackgroundResource(R.drawable.filled_pin);
+    }
+
+    private void lightPinOff(int currentPin) {
+        TextView view = (TextView) findViewById(PINS_MARKERS[currentPin]);
+        view.setBackgroundResource(R.drawable.empty_pin);
     }
 
     private void setPin(Stack<Integer> pins) {
