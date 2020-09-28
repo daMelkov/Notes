@@ -109,7 +109,7 @@ public class PinActivity extends AppCompatActivity {
 
     private void firePoint(int currentPin) {
         TextView view = (TextView) findViewById(PINS_MARKERS[currentPin]);
-        view.setTextAppearance(PinActivity.this, R.style.FilledPin);
+        view.setBackgroundResource(R.drawable.filled_pin);
     }
 
     private void setPin(Stack<Integer> pins) {
