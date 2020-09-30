@@ -1,5 +1,6 @@
 package com.astra.notes;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -83,17 +84,23 @@ public class PinActivity extends AppCompatActivity {
                 return;
             }
 
+            // disable to prevent double-click
             view.setEnabled(false);
 
+            // light on current pin
             PINS.add(number);
             lightPinOn(currentPin);
 
+            // move to next pin
             currentPin++;
+
+            // enable pin
+            view.setEnabled(true);
+
+            // for last pin: save pin-code and exit
             if(currentPin == PINS_COUNT) {
                 setPin(PINS);
             }
-
-            view.setEnabled(true);
         }
     };
 
@@ -105,13 +112,17 @@ public class PinActivity extends AppCompatActivity {
                 return;
             }
 
+            // disable to prevent double-click
             view.setEnabled(false);
 
+            // return to previous pin
             PINS.pop();
-
             currentPin--;
+
+            // light off previous pin
             lightPinOff(currentPin);
 
+            // enable view
             view.setEnabled(true);
         }
     };
@@ -127,6 +138,15 @@ public class PinActivity extends AppCompatActivity {
     }
 
     private void setPin(Stack<Integer> pins) {
+        Intent intent = new Intent();
+        intent.putExtra("pin_code", getCode(pins));
+
+        setResult(RESULT_OK, intent);
+
+        finish();
+    }
+
+    private int getCode(Stack<Integer> pins) {
         Integer[] numbers = new Integer[PINS_COUNT];
         pins.toArray(numbers);
 
@@ -135,7 +155,6 @@ public class PinActivity extends AppCompatActivity {
             builder.append(number);
         }
 
-        Integer code = Integer.parseInt(builder.toString());
-        finish();
+        return Integer.parseInt(builder.toString());
     }
 }
