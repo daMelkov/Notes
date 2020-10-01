@@ -5,6 +5,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -20,6 +21,9 @@ import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
     private static final int PIN = 100;
+
+    private SharedPreferences preferences;
+    private Keystore keyStore;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -50,8 +54,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        initPreferences();
         initViews();
     }
+
 
     private void initViews() {
         /* ToolBar */
@@ -77,6 +83,12 @@ public class MainActivity extends AppCompatActivity {
 
         final ListView list = findViewById(R.id.list);
         list.setAdapter(adapter);
+    }
+
+    private void initPreferences() {
+
+
+        keyStore = new InnerKeystore(MainActivity.this);
     }
 
     private BaseAdapter createAdapter(List<Map<String, String>> content) {
