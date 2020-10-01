@@ -88,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
     private void initPreferences() {
 
 
-        keyStore = new InnerKeystore(MainActivity.this);
+        keyStore = new HashedKeystore(MainActivity.this);
     }
 
     private BaseAdapter createAdapter(List<Map<String, String>> content) {
