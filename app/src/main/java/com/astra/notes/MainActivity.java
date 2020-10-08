@@ -22,9 +22,6 @@ import java.util.Map;
 public class MainActivity extends AppCompatActivity {
     private static final int PIN = 100;
 
-    private SharedPreferences preferences;
-    private Keystore keyStore;
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
@@ -46,18 +43,32 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == PIN) {
             Log.i("PIN_ACTIVITY", "pin requested");
+
+            String hash = data.getStringExtra("pin_code");
+            if(!SettingsActivity.getKeyStore().checkPin(hash)) {
+                Log.i("MAIN_ACTIVITY", "wrong pin");
+                finish();
+            }
         }
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        if(SettingsActivity.getKeyStore().hasPin()) {
+            checkPin();
+        }
+
         setContentView(R.layout.activity_main);
 
-        initPreferences();
         initViews();
     }
 
+    private void checkPin() {
+        Intent intent = new Intent(MainActivity.this, PinActivity.class);
+        startActivityForResult(intent, 0);
+    }
 
     private void initViews() {
         /* ToolBar */
@@ -83,12 +94,6 @@ public class MainActivity extends AppCompatActivity {
 
         final ListView list = findViewById(R.id.list);
         list.setAdapter(adapter);
-    }
-
-    private void initPreferences() {
-
-
-        keyStore = new HashedKeystore(MainActivity.this);
     }
 
     private BaseAdapter createAdapter(List<Map<String, String>> content) {

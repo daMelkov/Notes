@@ -1,6 +1,8 @@
 package com.astra.notes;
 
 import android.app.Activity;
+import android.app.Application;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
 
@@ -21,13 +23,14 @@ public class HashedKeystore implements Keystore {
     private static final String SALT = "salt";
     private static final String HASH = "hash";
 
-    private String salt;
-    private String hashCode;
+    private static String salt;
+    private static String hashCode;
     private SharedPreferences preferences;
     private static SecretKeyFactory factory;
 
-    public HashedKeystore(Activity activity) {
-        preferences = activity.getPreferences(MODE_PRIVATE);
+    public HashedKeystore(Context context) {
+        this.preferences = context.getSharedPreferences("PIN", MODE_PRIVATE);
+
         try {
             factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
         } catch (NoSuchAlgorithmException e) {
@@ -48,7 +51,7 @@ public class HashedKeystore implements Keystore {
         KeySpec spec = new PBEKeySpec(hashCode.toCharArray(), salt.getBytes(), 65536, 128);
 
         try {
-            if(Arrays.equals(hashCode.getBytes(), factory.generateSecret(spec).getEncoded())) {
+            if(Arrays.equals(pin.getBytes(), factory.generateSecret(spec).getEncoded())) {
                 return true;
             }
         } catch (InvalidKeySpecException e) {

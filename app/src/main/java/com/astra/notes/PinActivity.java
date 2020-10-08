@@ -146,7 +146,7 @@ public class PinActivity extends AppCompatActivity {
         finish();
     }
 
-    private int getCode(Stack<Integer> pins) {
+    private String getCode(Stack<Integer> pins) {
         Integer[] numbers = new Integer[PINS_COUNT];
         pins.toArray(numbers);
 
@@ -155,6 +155,6 @@ public class PinActivity extends AppCompatActivity {
             builder.append(number);
         }
 
-        return Integer.parseInt(builder.toString());
+        return builder.toString();
     }
 }

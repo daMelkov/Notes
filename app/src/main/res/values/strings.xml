@@ -16,4 +16,6 @@
     <string name="letter_0">0</string>
     <string name="delete">⌫</string>
     <string name="enter_pin">Enter pin:</string>
+    <string name="pin_exists">Пин-код установлен</string>
+    <string name="pin_not_exists">Пин-код не установлен</string>
 </resources>
