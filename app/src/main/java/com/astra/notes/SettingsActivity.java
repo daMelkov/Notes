@@ -1,8 +1,6 @@
 package com.astra.notes;
 
 import android.annotation.SuppressLint;
-import android.app.Application;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.CompoundButton;
@@ -11,6 +9,8 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.astra.notes.security.Security;
+
 public class SettingsActivity extends AppCompatActivity {
     private static final int PIN_CODE = 100;
 
@@ -18,33 +18,10 @@ public class SettingsActivity extends AppCompatActivity {
     private Switch swtPinStatus;
     private TextView txtPinStatus;
 
-    private static Keystore keyStore;
-    private static Context context;
-
-    /**
-     * Получить политику хранения пин-кода
-     * @return политика хранения пин-кода
-     */
-    public static Keystore getKeyStore() {
-        Context context = getContext();
-
-        if(keyStore == null) {
-            keyStore = new HashedKeystore(context);
-        }
-
-        return keyStore;
-    }
-
-    private static Context getContext() {
-        return context;
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
-
-        context = getApplicationContext();
 
         initViews();
     }
@@ -55,7 +32,7 @@ public class SettingsActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if (data != null) {
             String code = data.getStringExtra("pin_code");
-            getKeyStore().saveNew(code);
+            Security.saveNew(code);
         }
 
         setPinState();
@@ -67,7 +44,7 @@ public class SettingsActivity extends AppCompatActivity {
         swtPinStatus.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(!isChecked ^ getKeyStore().hasPin()) {
+                if(isChecked ^ Security.hasPin()) {
                     setPinState(!isChecked);
                 }
             }
@@ -82,15 +59,15 @@ public class SettingsActivity extends AppCompatActivity {
         if(!isChecked) {
             // set pin
             Intent intent = new Intent(SettingsActivity.this, PinActivity.class);
-            startActivityForResult(intent, 0);
+            startActivityForResult(intent, PIN_CODE);
         } else {
             // remove pin
-            getKeyStore().saveNew("");
+            Security.removePin();
         }
     }
 
     private void setPinState() {
-        if(getKeyStore().hasPin()) {
+        if(Security.hasPin()) {
             txtPinStatus.setText(getString(R.string.pin_exists));
             swtPinStatus.setChecked(true);
         } else {

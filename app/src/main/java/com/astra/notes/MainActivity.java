@@ -14,6 +14,8 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
+import com.astra.notes.security.Security;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -44,8 +46,8 @@ public class MainActivity extends AppCompatActivity {
         if(requestCode == PIN) {
             Log.i("PIN_ACTIVITY", "pin requested");
 
-            String hash = data.getStringExtra("pin_code");
-            if(!SettingsActivity.getKeyStore().checkPin(hash)) {
+            String pin = data.getStringExtra("pin_code");
+            if(!Security.checkPin(pin)) {
                 Log.i("MAIN_ACTIVITY", "wrong pin");
                 finish();
             }
@@ -56,7 +58,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        if(SettingsActivity.getKeyStore().hasPin()) {
+        Security.setContext(this);
+        if(Security.hasPin()) {
             checkPin();
         }
 
@@ -67,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void checkPin() {
         Intent intent = new Intent(MainActivity.this, PinActivity.class);
-        startActivityForResult(intent, 0);
+        startActivityForResult(intent, PIN);
     }
 
     private void initViews() {
@@ -83,7 +86,6 @@ public class MainActivity extends AppCompatActivity {
                 //content.clear();
                 //content.addAll(prepareContent());
                 //adapter.notifyDataSetChanged();
-
                 swipe.setRefreshing(false);
             }
         });

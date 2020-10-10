@@ -1,7 +1,5 @@
-package com.astra.notes;
+package com.astra.notes.security;
 
-import android.app.Activity;
-import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
@@ -23,8 +21,8 @@ public class HashedKeystore implements Keystore {
     private static final String SALT = "salt";
     private static final String HASH = "hash";
 
-    private static String salt;
-    private static String hashCode;
+    private static String mSalt;
+    private static String mHashCode;
     private SharedPreferences preferences;
     private static SecretKeyFactory factory;
 
@@ -37,50 +35,60 @@ public class HashedKeystore implements Keystore {
             Log.e("PIN_CODE", "pin-code factory error");
         }
 
-        salt = preferences.getString(SALT, "");
-        hashCode = preferences.getString(HASH, "");
+        mSalt = preferences.getString(SALT, "");
+        mHashCode = preferences.getString(HASH, "");
     }
 
     @Override
     public boolean hasPin() {
-        return hashCode.length() != 0 && salt.length() != 0;
+        return mHashCode.length() != 0 && mSalt.length() != 0;
     }
 
     @Override
     public boolean checkPin(String pin) {
-        KeySpec spec = new PBEKeySpec(hashCode.toCharArray(), salt.getBytes(), 65536, 128);
+        String hash = generateHash(pin, mSalt);
 
-        try {
-            if(Arrays.equals(pin.getBytes(), factory.generateSecret(spec).getEncoded())) {
-                return true;
-            }
-        } catch (InvalidKeySpecException e) {
-            Log.e("PIN_CODE", "pin-code invalid key spec exception.");
-        }
-
-        return false;
+        return Arrays.equals(hash.getBytes(), mHashCode.getBytes());
     }
 
     @Override
     public void saveNew(String pin) {
+        mSalt = generateSalt();
+        mHashCode = generateHash(pin, mSalt);
+        writePin(mHashCode, mSalt);
+    }
+
+    @Override
+    public void removePin() {
+        mHashCode = "";
+        mSalt = "";
+        writePin(mHashCode, mSalt);
+    }
+
+    private String generateSalt() {
         SecureRandom random = new SecureRandom();
         byte[] saltBytes = new byte[16];
         random.nextBytes(saltBytes);
 
-        salt = new String(saltBytes, StandardCharsets.UTF_8);
+        return new String(saltBytes, StandardCharsets.UTF_8);
+    }
 
-        KeySpec spec = new PBEKeySpec(pin.toCharArray(), saltBytes, 65536, 128);
+    private String generateHash(String pin, String salt) {
+        KeySpec spec = new PBEKeySpec(pin.toCharArray(), salt.getBytes(), 65536, 128);
         try {
             byte[] hashBytes = factory.generateSecret(spec).getEncoded();
-            hashCode = new String(hashBytes, StandardCharsets.UTF_8);
-
-            SharedPreferences.Editor editor = preferences.edit();
-            editor.putString(SALT, salt);
-            editor.putString(HASH, hashCode);
-            editor.apply();
+            return new String(hashBytes, StandardCharsets.UTF_8);
         } catch (InvalidKeySpecException e) {
             e.printStackTrace();
         }
 
+        return null;
+    }
+
+    private void writePin(String hashCode, String salt) {
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString(SALT, salt);
+        editor.putString(HASH, hashCode);
+        editor.apply();
     }
 }
