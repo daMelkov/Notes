@@ -26,7 +26,6 @@ public class SettingsActivity extends AppCompatActivity {
         initViews();
     }
 
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -57,7 +56,7 @@ public class SettingsActivity extends AppCompatActivity {
 
     private void setPinState(boolean isChecked) {
         if(!isChecked) {
-            // set pin
+            // set pin (in onActivityResult)
             Intent intent = new Intent(SettingsActivity.this, PinActivity.class);
             startActivityForResult(intent, PIN_CODE);
         } else {

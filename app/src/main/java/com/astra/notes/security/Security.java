@@ -5,7 +5,6 @@ import android.content.Context;
 
 public class Security extends Activity /*implements Keystore*/ {
     private static Security instance;
-    private Context context;
     private Keystore keyStore;
 
     //@Override
@@ -29,7 +28,6 @@ public class Security extends Activity /*implements Keystore*/ {
     }
 
     public static void setContext(Context context) {
-        getInstance().context = context;
         getInstance().keyStore = new HashedKeystore(context);
     }
 

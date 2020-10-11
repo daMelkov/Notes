@@ -2,6 +2,7 @@ package com.astra.notes;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.ActivityCompat;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.Intent;
@@ -49,7 +50,6 @@ public class MainActivity extends AppCompatActivity {
             String pin = data.getStringExtra("pin_code");
             if(!Security.checkPin(pin)) {
                 Log.i("MAIN_ACTIVITY", "wrong pin");
-                finish();
             }
         }
     }
