@@ -15,6 +15,8 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
+import com.astra.notes.note.NoteRepository;
+import com.astra.notes.note.SqliteRepository;
 import com.astra.notes.security.Security;
 
 import java.util.ArrayList;
@@ -24,6 +26,7 @@ import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
     private static final int PIN = 100;
+    private NoteRepository repository;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -57,6 +60,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        repository = new SqliteRepository();
 
         Security.setContext(this);
         if(Security.hasPin()) {
