@@ -5,7 +5,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
 <androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -33,7 +32,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:nestedScrollingEnabled="true"
-            app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+            app:layout_constraintTop_toBottomOf="@+id/toolbar" >
+        </ListView>
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -44,7 +44,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="24dp"
-        android:src="@drawable/baseline_add_circle_24"
+        android:src="@drawable/baseline_add_white_18dp"
         app:elevation="6dp"
         app:pressedTranslationZ="12dp" />
 
