@@ -11,14 +11,17 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
+import com.astra.notes.note.NoteActivity;
 import com.astra.notes.note.NoteRepository;
 import com.astra.notes.note.SqliteRepository;
 import com.astra.notes.security.Security;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -27,6 +30,7 @@ import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
     private static final int PIN = 100;
+    private static final int NEED_REFRESH = 200;
     private NoteRepository repository;
 
     @Override
@@ -103,6 +107,16 @@ public class MainActivity extends AppCompatActivity {
 
         final ListView list = findViewById(R.id.list);
         list.setAdapter(adapter);
+
+        /* FAB */
+        FloatingActionButton btnAdd = findViewById(R.id.fab_add);
+        btnAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, NoteActivity.class);
+                startActivityForResult(intent, NEED_REFRESH);
+            }
+        });
     }
 
     private BaseAdapter createAdapter(List<Map<String, String>> content) {
