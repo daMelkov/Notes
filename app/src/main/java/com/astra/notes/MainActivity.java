@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+import android.widget.Toast;
 
 import com.astra.notes.note.NoteRepository;
 import com.astra.notes.note.SqliteRepository;
@@ -52,7 +53,8 @@ public class MainActivity extends AppCompatActivity {
 
             String pin = data.getStringExtra("pin_code");
             if(!Security.checkPin(pin)) {
-                Log.i("MAIN_ACTIVITY", "wrong pin");
+                Toast.makeText(MainActivity.this, "Wrong pin!", Toast.LENGTH_SHORT).show();
+                checkPin();
             }
         }
     }

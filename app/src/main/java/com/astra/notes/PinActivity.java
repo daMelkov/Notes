@@ -64,14 +64,6 @@ public class PinActivity extends AppCompatActivity {
 
         Button btnDelete = findViewById(R.id.button_delete);
         btnDelete.setOnClickListener(onDelete);
-
-        Button btnCancel = findViewById(R.id.button_cancel);
-        btnCancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                PINS.size();
-            }
-        });
     }
 
     /* 0...9 */
