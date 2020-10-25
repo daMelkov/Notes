@@ -18,4 +18,6 @@
     <string name="enter_pin">Enter pin:</string>
     <string name="pin_exists">Пин-код установлен</string>
     <string name="pin_not_exists">Пин-код не установлен</string>
+    <string name="note_title">Заголовок заметки</string>
+    <string name="calendar">calendar</string>
 </resources>

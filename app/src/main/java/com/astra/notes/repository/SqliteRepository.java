@@ -1,8 +1,10 @@
-package com.astra.notes.note;
+package com.astra.notes.repository;
+
+import com.astra.notes.note.Note;
 
 import java.util.List;
 
-public class SqliteRepository implements NoteRepository {
+public class SqliteRepository implements Repository {
     @Override
     public Note getNoteById(String id) {
         return null;

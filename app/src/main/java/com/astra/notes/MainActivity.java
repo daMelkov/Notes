@@ -2,11 +2,9 @@ package com.astra.notes;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.app.ActivityCompat;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -18,8 +16,6 @@ import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
 import com.astra.notes.note.NoteActivity;
-import com.astra.notes.note.NoteRepository;
-import com.astra.notes.note.SqliteRepository;
 import com.astra.notes.security.Security;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
@@ -31,7 +27,6 @@ import java.util.Map;
 public class MainActivity extends AppCompatActivity {
     private static final int PIN = 100;
     private static final int NEED_REFRESH = 200;
-    private NoteRepository repository;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -66,8 +61,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        repository = new SqliteRepository();
 
         Security.setContext(this);
         if(Security.hasPin()) {
