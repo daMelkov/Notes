@@ -10,6 +10,8 @@ import androidx.room.TypeConverters;
 import com.astra.notes.note.Note;
 import com.astra.notes.note.NoteDao;
 
+import java.io.File;
+
 @Database(entities = Note.class, exportSchema = false, version = 1)
 @TypeConverters({Converters.class})
 public abstract class Db extends RoomDatabase {
@@ -19,7 +21,9 @@ public abstract class Db extends RoomDatabase {
     public static synchronized Db getInstance(Context context) {
         if(instance == null) {
             instance = Room.databaseBuilder(context.getApplicationContext(), Db.class, DB_NAME)
+                    .createFromFile(new File(DB_NAME))
                     .fallbackToDestructiveMigration()
+                    .allowMainThreadQueries()
                     .build();
         }
 
