@@ -27,7 +27,6 @@
         android:inputType="textPersonName"
         android:autofillHints="@string/note_title"
         android:hint="@string/note_title"
-        tools:text="Name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toolbar" />
@@ -40,23 +39,22 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
-        android:ems="10"
         android:gravity="start|top"
         android:inputType="textMultiLine"
+        android:hint="@string/note_description"
         app:layout_constraintBottom_toTopOf="@+id/check_deadline"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/edt_title"
         app:layout_constraintVertical_bias="0.51"
-        android:autofillHints=""
-        tools:ignore="LabelFor" />
+        android:autofillHints="" />
 
     <CheckBox
         android:id="@+id/check_deadline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        tools:text="deadline"
+        android:text="@string/has_deadline"
         app:layout_constraintBottom_toTopOf="@+id/edt_deadline_date"
         app:layout_constraintStart_toStartOf="@+id/edt_deadline_date" />
 
@@ -67,12 +65,11 @@
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         android:ems="10"
-        android:inputType="date"
+        android:editable="false"
         app:layout_constraintBottom_toBottomOf="@+id/btn_select_date"
         app:layout_constraintEnd_toStartOf="@+id/btn_select_date"
         app:layout_constraintStart_toStartOf="parent"
-        android:autofillHints=""
-        tools:ignore="LabelFor" />
+        android:autofillHints="" />
 
     <ImageButton
         android:id="@+id/btn_select_date"
