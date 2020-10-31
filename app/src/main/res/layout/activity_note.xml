@@ -1,86 +1,104 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_height="match_parent"
+    android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary"
-        android:elevation="4dp"
-        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+        android:layout_height="match_parent">
 
-    <EditText
-        android:id="@+id/edt_title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:inputType="textPersonName"
-        android:autofillHints="@string/note_title"
-        android:hint="@string/note_title"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            android:elevation="4dp"
+            android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
-    <EditText
-        android:id="@+id/edt_description"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        android:gravity="start|top"
-        android:inputType="textMultiLine"
-        android:hint="@string/note_description"
-        app:layout_constraintBottom_toTopOf="@+id/check_deadline"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edt_title"
-        app:layout_constraintVertical_bias="0.51"
-        android:autofillHints="" />
+        <EditText
+            android:id="@+id/edt_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:inputType="textPersonName"
+            android:autofillHints="@string/note_title"
+            android:hint="@string/note_title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
-    <CheckBox
-        android:id="@+id/check_deadline"
+        <EditText
+            android:id="@+id/edt_description"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            android:gravity="start|top"
+            android:inputType="textMultiLine"
+            android:hint="@string/note_description"
+            app:layout_constraintBottom_toTopOf="@+id/check_deadline"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/edt_title"
+            app:layout_constraintVertical_bias="0.51"
+            android:autofillHints="" />
+
+        <CheckBox
+            android:id="@+id/check_deadline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:text="@string/has_deadline"
+            app:layout_constraintBottom_toTopOf="@+id/edt_deadline_date"
+            app:layout_constraintStart_toStartOf="@+id/edt_deadline_date" />
+
+        <EditText
+            android:id="@+id/edt_deadline_date"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:ems="10"
+            android:inputType="date"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="@+id/btn_select_date"
+            app:layout_constraintEnd_toStartOf="@+id/btn_select_date"
+            app:layout_constraintStart_toStartOf="parent"
+            android:autofillHints="" />
+
+        <ImageButton
+            android:id="@+id/btn_select_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="90dp"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:srcCompat="@drawable/ic_event"
+            android:contentDescription="@string/calendar" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_add"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:text="@string/has_deadline"
-        app:layout_constraintBottom_toTopOf="@+id/edt_deadline_date"
-        app:layout_constraintStart_toStartOf="@+id/edt_deadline_date" />
+        android:layout_gravity="bottom|end"
+        android:layout_margin="16dp"
+        android:src="@drawable/ic_save"
+        android:clickable="true"
+        android:focusable="true"
+        app:elevation="6dp"
+        app:pressedTranslationZ="12dp" />
 
-    <EditText
-        android:id="@+id/edt_deadline_date"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:ems="10"
-        android:editable="false"
-        app:layout_constraintBottom_toBottomOf="@+id/btn_select_date"
-        app:layout_constraintEnd_toStartOf="@+id/btn_select_date"
-        app:layout_constraintStart_toStartOf="parent"
-        android:autofillHints="" />
-
-    <ImageButton
-        android:id="@+id/btn_select_date"
-        android:layout_width="47dp"
-        android:layout_height="56dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/ic_launcher_foreground"
-        android:contentDescription="@string/calendar" />
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

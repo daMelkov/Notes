@@ -43,7 +43,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="24dp"
-        android:src="@drawable/baseline_add_white_18dp"
+        android:src="@drawable/ic_add"
         android:clickable="true"
         android:focusable="true"
         app:elevation="6dp"
