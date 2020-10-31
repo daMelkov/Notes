@@ -15,7 +15,6 @@ import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
-import com.astra.notes.note.Note;
 import com.astra.notes.note.NoteActivity;
 import com.astra.notes.security.Security;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -28,7 +27,6 @@ import java.util.Map;
 public class MainActivity extends AppCompatActivity {
     private static final int PIN = 100;
     private static final int NEED_REFRESH = 200;
-    private Db db;
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -131,36 +129,23 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private List<Map<String, String>> getContent() {
-        db = Db.getInstance(MainActivity.this);
-
         List<Map<String, String>> list = new ArrayList<>();
 
-        List<Note> notes = db.noteDao().getNoteList();
-        for(Note note : notes) {
-            Map<String, String> item = new HashMap<>();
+        Map<String, String> item1 = new HashMap<>();
+        item1.put("header", "header");
+        item1.put("content", "content");
+        item1.put("deadline","2020-09-18");
+        list.add(item1);
 
-            item.put("id", String.valueOf(note.getId()));
-            item.put("header", note.getTitle());
-            item.put("context", note.getDescription());
-            item.put("deadline", note.getDate().toString());
-
-            list.add(item);
-        }
-
-//        Map<String, String> item1 = new HashMap<>();
-//        item1.put("header", "header");
-//        item1.put("content", "content");
-//        item1.put("deadline","2020-09-18");
-//        list.add(item1);
-//
-//        Map<String, String> item2 = new HashMap<>();
-//        item2.put("content", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. " +
-//                "Nullam ut porttitor libero. Aenean in sem orci. Quisque fermentum ornare bibendum. " +
-//                "Proin ultricies, turpis non maximus imperdiet, lectus nulla efficitur justo, " +
-//                "a faucibus neque ligula vel nulla. Pellentesque vel arcu eleifend, " +
-//                "feugiat mauris a, pretium turpis.");
-//        item2.put("deadline","2020-09-18");
-//        list.add(item2);
+        Map<String, String> item2 = new HashMap<>();
+        //item2.put("header", "header");
+        item2.put("content", "Lorem ipsum dolor sit amet, consectetur adipiscing elit. " +
+                "Nullam ut porttitor libero. Aenean in sem orci. Quisque fermentum ornare bibendum. " +
+                "Proin ultricies, turpis non maximus imperdiet, lectus nulla efficitur justo, " +
+                "a faucibus neque ligula vel nulla. Pellentesque vel arcu eleifend, " +
+                "feugiat mauris a, pretium turpis.");
+        item2.put("deadline","2020-09-18");
+        list.add(item2);
 
         return list;
     }
